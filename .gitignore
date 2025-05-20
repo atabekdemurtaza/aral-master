@@ -1,0 +1,5 @@
+/env
+/.env
+*.sw[a-z]
+*.py[a-z]
+db.sqlite3

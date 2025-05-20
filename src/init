@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+dropdb --if-exists aral
+dropuser --if-exists aral
+createuser -s -r -d --replication aral
+createdb --owner=aral aral
+
+# if [ ! -d .env ]; then
+# 	virtualenv --python=python3 --prompt="[v]" .env
+# fi
+# 
+# . .env/bin/activate
+# 
+# pip install -r requirements.txt
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createcachetable
+
+cat create_default_superuser.py | python manage.py shell
+
+# mkdir -p ./temp
+
+echo "\nTo skip database creation and fixture loads next time, simply run\n"
+echo " ----------------------------"
+echo "| python manage.py runserver |"
+echo " ----------------------------\n"
+python manage.py runserver 127.0.0.1:8080
