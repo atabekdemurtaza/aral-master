@@ -1,14 +1,15 @@
 from .base import *
 
 ALLOWED_HOSTS += [
-    "greenaralsea.org"
+    "greenaralsea.org",
+    "localhost",
 ]
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DJANGO_DB_NAME', 'db'),
-        'USER': os.environ.get('DJANGO_DB_USER', 'user'),
+        'USER': os.environ.get('DJANGO_DB_USER', 'atabek'),
         'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', 'qwe123'),
         'HOST': os.environ.get('DJANGO_DB_HOST', 'localhost'),
         'PORT': os.environ.get('DJANGO_DB_PORT', 5432),
@@ -25,7 +26,8 @@ STATIC_ROOT = os.environ.get(
     os.path.join(BASE_DIR, 'static')
 )
 
-DEBUG = os.environ.get('DJANGO_DEBUG') or False
+# DEBUG = os.environ.get('DJANGO_DEBUG') or False
+DEBUG = True
 
 SECRET_KEY = os.environ.get(
     'DJANGO_SECRET_KEY',
@@ -109,3 +111,11 @@ JAZZMIN_SETTINGS = {
     "search_bar": True,
     "show_ui_builder": True,
 }
+
+AUTHENTICATION_BACKENDS = [
+    # Django default auth backends
+    'django.contrib.auth.backends.ModelBackend',
+
+    # AxesBackend should be the last backend in the AUTHENTICATION_BACKENDS list
+    'axes.backends.AxesBackend',
+]
