@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'tinymce',
     'axes',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
@@ -130,6 +131,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ),
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 NUMBER_OF_DONATIONS_TO_SHOW = os.environ.get(
