@@ -197,15 +197,35 @@ class USDRateSerializer(serializers.ModelSerializer):
 
 
 class NewsModelSerializer(serializers.ModelSerializer):
+
+    title = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+
+    def get_title(self, obj):
+        lang = self.context.get('lang', 'ru')
+        field_name = f'title_{lang}'
+        # Используем перевод, если он существует, иначе используем основной заголовок
+        if hasattr(obj, field_name) and getattr(obj, field_name):
+            return getattr(obj, field_name)
+        return obj.title
+
+    def get_description(self, obj):
+        lang = self.context.get('lang', 'ru')
+        field_name = f'description_{lang}'
+        # Используем перевод, если он существует, иначе используем основное описание
+        if hasattr(obj, field_name) and getattr(obj, field_name):
+            return getattr(obj, field_name)
+        return obj.description
+
     class Meta:
         model = NewsModel
         fields = [
-            'id',  # 'id' is added to the fields list
+            'id',
             'title',
             'description',
             'image',
             'created',
-            ]
+        ]
         read_only_fields = [
             'created',
         ]

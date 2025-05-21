@@ -579,6 +579,39 @@ class NewsModel(models.Model):
     description = models.TextField(
         _('Description'),
     )
+    title_ru = models.CharField(
+        _('Title (Russian)'),
+        max_length=60,
+        null=True,
+        blank=True,
+    )
+    title_en = models.CharField(
+        _('Title (English)'),
+        max_length=60,
+        null=True,
+        blank=True,
+    )
+    title_uz = models.CharField(
+        _('Title (Uzbek)'),
+        max_length=60,
+        null=True,
+        blank=True,
+    )
+    description_ru = models.TextField(
+        _('Description (Russian)'),
+        null=True,
+        blank=True,
+    )
+    description_en = models.TextField(
+        _('Description (English)'),
+        null=True,
+        blank=True,
+    )
+    description_uz = models.TextField(
+        _('Description (Uzbek)'),
+        null=True,
+        blank=True,
+    )
     image = models.ImageField(
         _('Image'),
         upload_to='news/',

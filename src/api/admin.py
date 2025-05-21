@@ -365,7 +365,7 @@ class ClassyTransactionAdmin(admin.ModelAdmin):
 
 
 class NewsModelAdmin(admin.ModelAdmin):
-    search_fields = ['id', 'title']
+    search_fields = ['id', 'title', 'title_ru', 'title_en', 'title_uz']
     list_display = (
         'id',  # 'id' is added to the list_display
         'title',
@@ -379,6 +379,24 @@ class NewsModelAdmin(admin.ModelAdmin):
 
     readonly_fields = ['current_image']
     actions = ["publish", "unpublish"]
+
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'description', 'image', 'is_published', 'current_image')
+        }),
+        ('Русская версия', {
+            'fields': ('title_ru', 'description_ru'),
+            'classes': ('collapse',),
+        }),
+        ('Английская версия', {
+            'fields': ('title_en', 'description_en'),
+            'classes': ('collapse',),
+        }),
+        ('Узбекская версия', {
+            'fields': ('title_uz', 'description_uz'),
+            'classes': ('collapse',),
+        }),
+    )
 
     def current_image(self, obj):
         return mark_safe(

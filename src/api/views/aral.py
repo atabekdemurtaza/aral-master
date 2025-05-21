@@ -159,14 +159,33 @@ class NewsModelListView(generics.ListAPIView):
     def get_queryset(self):
         return NewsModel.objects.filter(is_published=True).order_by('-created')
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        # Получаем параметр языка из запроса, по умолчанию 'ru'
+        lang = self.request.query_params.get('lang', 'ru')
+        if lang not in ['ru', 'en', 'uz']:
+            lang = 'ru'
+        context['lang'] = lang
+        return context
+
+
 class NewsDetailView(generics.RetrieveAPIView):
     queryset = NewsModel.objects.all()
     serializer_class = NewsModelSerializer
     permission_classes = (AllowAny,)
 
     def get_object(self):
-        obj_id = self.kwargs.get('pk')  # or 'id' if your URL pattern uses <int:id>
+        obj_id = self.kwargs.get('pk')
         return get_object_or_404(NewsModel, pk=obj_id)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        # Получаем параметр языка из запроса, по умолчанию 'ru'
+        lang = self.request.query_params.get('lang', 'ru')
+        if lang not in ['ru', 'en', 'uz']:
+            lang = 'ru'
+        context['lang'] = lang
+        return context
 
 
 class RedirectView(views.APIView):
