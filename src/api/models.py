@@ -633,6 +633,9 @@ class NewsModel(models.Model):
         db_index=True,
     )
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "News Entry"
         verbose_name_plural = "News Entries"
