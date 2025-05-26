@@ -367,7 +367,7 @@ class ClassyTransactionAdmin(admin.ModelAdmin):
 class NewsModelAdmin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'title_ru', 'title_en', 'title_uz']
     list_display = (
-        'id',  # 'id' is added to the list_display
+        'id',
         'title',
         'description',
         'created',
@@ -388,11 +388,11 @@ class NewsModelAdmin(admin.ModelAdmin):
             'fields': ('title_ru', 'description_ru'),
             'classes': ('collapse',),
         }),
-        ('Английская версия', {
+        ('English version', {
             'fields': ('title_en', 'description_en'),
             'classes': ('collapse',),
         }),
-        ('Узбекская версия', {
+        ('Uzbek versiya', {
             'fields': ('title_uz', 'description_uz'),
             'classes': ('collapse',),
         }),
