@@ -14,7 +14,7 @@
 ### Git clone
 
 ```
-git clone https://gitlab.com/undp-projects/aral.git
+git clone https://github.com/atabekdemurtaza/aral-master.git
 ```
 
 ### Create virtual environment
