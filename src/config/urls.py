@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 
 
-# Функция для отображения простой API документации
 def api_docs_view(request):
     html_content = """
     <!DOCTYPE html>
