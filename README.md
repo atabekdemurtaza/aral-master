@@ -29,12 +29,6 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-### All-in-one script
-```
-cd src/
-./init
-```
-
 ### Run server
 ```
 python manage.py runserver
